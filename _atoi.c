@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
- * interactive - If the shell is in interactive mode it returns true
+ * interactive - returns true if shell is interactive mode
  * @info: struct address
  *
- * Return: success 1 if it is in interactive mode, 0 if it fails
+ * Return: 1 if interactive mode, 0 otherwise
  */
 int interactive(info_t *info)
 {
@@ -12,10 +12,10 @@ int interactive(info_t *info)
 }
 
 /**
- * is_delim - function to check if it is a delimiter
- * @c: character to check
- * @delim: string delimiter
- * Return: success 1 if true, fail 0 if false
+ * is_delim - checks if character is a delimeter
+ * @c: the char to check
+ * @delim: the delimeter string
+ * Return: 1 if true, 0 if false
  */
 int is_delim(char c, char *delim)
 {
@@ -26,8 +26,8 @@ int is_delim(char c, char *delim)
 }
 
 /**
- *_isalpha - looks into alphabet letters
- *@c: character to take in at stdin
+ *_isalpha - checks for alphabetic character
+ *@c: The character to input
  *Return: 1 if c is alphabetic, 0 otherwise
  */
 
@@ -47,28 +47,28 @@ int _isalpha(int c)
 
 int _atoi(char *s)
 {
-	int count, sign = 1, flag = 0, ptr;
-	unsigned int answer = 0;
+	int i, sign = 1, flag = 0, output;
+	unsigned int result = 0;
 
-	for (count = 0;  s[count] != '\0' && flag != 2; count++)
+	for (i = 0;  s[i] != '\0' && flag != 2; i++)
 	{
-		if (s[count] == '-')
+		if (s[i] == '-')
 			sign *= -1;
 
-		if (s[count] >= '0' && s[count] <= '9')
+		if (s[i] >= '0' && s[i] <= '9')
 		{
 			flag = 1;
-			answer *= 10;
-			answer += (s[count] - '0');
+			result *= 10;
+			result += (s[i] - '0');
 		}
 		else if (flag == 1)
 			flag = 2;
 	}
 
 	if (sign == -1)
-		ptr = -answer;
+		output = -result;
 	else
-		ptr = answer;
+		output = result;
 
-	return (ptr);
+	return (output);
 }
