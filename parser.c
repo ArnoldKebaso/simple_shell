@@ -1,21 +1,21 @@
 #include "shell.h"
 
 /**
- * is_cmd - determines if a file is an executable command
- * @info: the info struct
- * @path: path to the file
+ * is_cmd - checks if a file is an executable command
+ * @info: the infomation structure
+ * @path: file path
  *
  * Return: 1 if true, 0 otherwise
  */
 int is_cmd(info_t *info, char *path)
 {
-	struct stat st;
+	struct stat cd;
 
 	(void)info;
-	if (!path || stat(path, &st))
+	if (!path || stat(path, &cd))
 		return (0);
 
-	if (st.st_mode & S_IFREG)
+	if (cd.cd_mode & S_IFREG)
 	{
 		return (1);
 	}
@@ -28,31 +28,31 @@ int is_cmd(info_t *info, char *path)
  * @start: starting index
  * @stop: stopping index
  *
- * Return: pointer to new buffer
+ * Return: new pointer
  */
 char *dup_chars(char *pathstr, int start, int stop)
 {
 	static char buf[1024];
-	int i = 0, k = 0;
+	int j = 0, l = 0;
 
-	for (k = 0, i = start; i < stop; i++)
-		if (pathstr[i] != ':')
-			buf[k++] = pathstr[i];
-	buf[k] = 0;
+	for (l = 0, j = start; j < stop; j++)
+		if (pathstr[j] != ':')
+			buf[l++] = pathstr[j];
+	buf[l] = 0;
 	return (buf);
 }
 
 /**
- * find_path - finds this cmd in the PATH string
- * @info: the info struct
- * @pathstr: the PATH string
- * @cmd: the cmd to find
+ * find_path - finds cmd in a path
+ * @info: the infomation structure
+ * @pathstr: the PATH
+ * @cmd: the command prompt to search
  *
  * Return: full path of cmd if found or NULL
  */
 char *find_path(info_t *info, char *pathstr, char *cmd)
 {
-	int i = 0, curr_pos = 0;
+	int n = 0, curr_pos = 0;
 	char *path;
 
 	if (!pathstr)
@@ -64,9 +64,9 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 	}
 	while (1)
 	{
-		if (!pathstr[i] || pathstr[i] == ':')
+		if (!pathstr[n] || pathstr[n] == ':')
 		{
-			path = dup_chars(pathstr, curr_pos, i);
+			path = dup_chars(pathstr, curr_pos, n);
 			if (!*path)
 				_strcat(path, cmd);
 			else
@@ -76,12 +76,11 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 			}
 			if (is_cmd(info, path))
 				return (path);
-			if (!pathstr[i])
+			if (!pathstr[n])
 				break;
-			curr_pos = i;
+			curr_pos = n;
 		}
-		i++;
+		n++;
 	}
 	return (NULL);
 }
-
