@@ -63,7 +63,7 @@ char *_strncat(char *ptr, char *atp, int c)
  *@ch: the character to look for
  *Return: (s) a pointer to the memory area s
  */
-char *_strchr(char *st, char ch)
+char *_strchr(char *s, char ch)
 {
 	do {
 		if (*st == ch)
