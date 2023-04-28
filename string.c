@@ -1,47 +1,47 @@
 #include "shell.h"
 
 /**
- * _strlen - returns the length of a string
- * @s: the string whose length to check
+ * _strlen - string length
+ * @str: the string to check
  *
- * Return: integer length of string
+ * Return: length of string
  */
-int _strlen(char *s)
+int _strlen(char *str)
 {
-	int i = 0;
+	int l = 0;
 
-	if (!s)
+	if (!str)
 		return (0);
 
-	while (*s++)
-		i++;
-	return (i);
+	while (*str++)
+		l++;
+	return (l);
 }
 
 /**
- * _strcmp - performs lexicogarphic comparison of two strinngs.
- * @s1: the first strang
- * @s2: the second strang
+ * _strcmp - performs a comparison of two strings.
+ * @str1: the first string
+ * @str2: the second string
  *
- * Return: negative if s1 < s2, positive if s1 > s2, zero if s1 == s2
+ * Return: - if str1 < str2, + if str1 > str2, 0 if str1 == str2
  */
-int _strcmp(char *s1, char *s2)
+int _strcmp(char *str1, char *sstr2)
 {
-	while (*s1 && *s2)
+	while (*str1 && *str2)
 	{
-		if (*s1 != *s2)
-			return (*s1 - *s2);
-		s1++;
-		s2++;
+		if (*str1 != *str2)
+			return (*str1 - *str2);
+		str1++;
+		str2++;
 	}
-	if (*s1 == *s2)
+	if (*str1 == *str2)
 		return (0);
 	else
-		return (*s1 < *s2 ? -1 : 1);
+		return (*str1 < *str2 ? -1 : 1);
 }
 
 /**
- * starts_with - checkss if the  needle starts with a haystack
+ * starts_with - checks if needle starts with haystack
  * @haystack: string to search
  * @needle: the substring to find
  *
@@ -57,20 +57,19 @@ char *starts_with(const char *haystack, const char *needle)
 
 /**
  * _strcat - concatenates two strings
- * @dest: the destination buffer
- * @src: the source buffer
+ * @atp: destination buffer
+ * @buf: source buffer
  *
- * Return: pointer to destination buffer
+ * Return: pointer to atp
  */
-char *_strcat(char *dest, char *src)
+char *_strcat(char *atp, char *buf)
 {
-	char *ret = dest;
+	char *ch = atp;
 
-	while (*dest)
-		dest++;
-	while (*src)
-		*dest++ = *src++;
-	*dest = *src;
-	return (ret);
+	while (*atp)
+		atp++;
+	while (*buf)
+		*atp++ = *buf++;
+	*atp = *buf;
+	return (ch);
 }
-
