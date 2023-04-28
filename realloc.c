@@ -1,64 +1,62 @@
 #include "shell.h"
 
 /**
- * _memset - fills memory with a constant byte
- * @s: the pointer to the memory area
- * @b: the byte to fill *s with
- * @n: the amount of bytes to be filled
- * Return: (s) a pointer to the memory area s
+ **_memset - fills memory with a constant byte
+ *@ptr: the pointer to the memory area
+ *@by: the byte to fill the pointer
+ *@a: the amount of bytes to be filled
+ *Return: (ptr) a pointer to the memory area pointer
  */
-char *_memset(char *s, char b, unsigned int n)
+char *_memset(char *ptr, char by, unsigned int a)
 {
 	unsigned int i;
 
-	for (i = 0; i < n; i++)
-		s[i] = b;
-	return (s);
+	for (i = 0; i < a; i++)
+		ptr[i] = by;
+	return (ptr);
 }
 
 /**
- * ffree - frees a string of strings
- * @pp: string of strings
+ * ffree - frees a string
+ * @str: the string of strings
  */
-void ffree(char **pp)
+void ffree(char **str)
 {
-	char **a = pp;
+	char **ch = str;
 
-	if (!pp)
+	if (!str)
 		return;
-	while (*pp)
-		free(*pp++);
-	free(a);
+	while (*str)
+		free(*str++);
+	free(ch);
 }
 
 /**
- * _realloc - realocates a block of memory
- * @ptr: pointer to previous malloc block
- * @old_size: byte size of previous block
- * @new_size: byte size of a new block
+ * _realloc - memory reallocation
+ * @ptr: pointer to previous malloc'ated block
+ * @old: byte size of previous block
+ * @new: byte size of new block
  *
- * Return: pointer to thee ol'block name.
+ * Return: pointer to da ol'block nameen.
  */
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
+void *_realloc(void *ptr, unsigned int old, unsigned int new)
 {
-	char *p;
+	char *ch;
 
 	if (!ptr)
-		return (malloc(new_size));
-	if (!new_size)
+		return (malloc(new));
+	if (!new)
 		return (free(ptr), NULL);
-	if (new_size == old_size)
+	if (new == old)
 		return (ptr);
 
-	p = malloc(new_size);
-	if (!p)
+	ch = malloc(new);
+	if (!ch)
 		return (NULL);
 
-	old_size = old_size < new_size ? old_size : new_size;
-	while (old_size--)
-		p[old_size] = ((char *)ptr)[old_size];
+	old = old < new ? old : new;
+	while (old--)
+		ch[old] = ((char *)ptr)[old];
 	free(ptr);
-	return (p);
+	return (ch);
 }
-
-
