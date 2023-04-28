@@ -210,6 +210,7 @@ int write_history(info_t *info);
 int read_history(info_t *info);
 int build_history_list(info_t *info, char *reg, int linecount);
 int renumber_history(info_t *info);
+
 /* toem_lists.c */
 list_t *add_node(list_t **, const char *, int);
 list_t *add_node_end(list_t **, const char *, int);
@@ -232,4 +233,3 @@ int replace_vars(info_t *);
 int replace_string(char **, char *);
 
 #endif
-
