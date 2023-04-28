@@ -2,20 +2,20 @@
 
 /**
  * list_len - determines length of linked list
- * @ptr: pointerto the node
+ * @ptr: pointer to the node
  *
- * Return: size of list
+ * Return: list size
  */
 size_t list_len(const list_t *ptr)
 {
-	size_t i = 0;
+	size_t k = 0;
 
 	while (ptr)
 	{
 		ptr = ptr->next;
-		i++;
+		k++;
 	}
-	return (i);
+	return (k);
 }
 
 /**
@@ -27,31 +27,31 @@ size_t list_len(const list_t *ptr)
 char **list_to_strings(list_t *h)
 {
 	list_t *atp = h;
-	size_t i = list_len(h), j;
-	char **strs;
-	char *str;
+	size_t k = list_len(h), j;
+	char **atp;
+	char *ptr;
 
-	if (!h || !i)
+	if (!h || !k)
 		return (NULL);
-	strs = malloc(sizeof(char *) * (i + 1));
-	if (!strs)
+	atp = malloc(sizeof(char *) * (k + 1));
+	if (!atp)
 		return (NULL);
-	for (i = 0; atp; atp = atp->next, i++)
+	for (i = 0; atp; atp = atp->next, k++)
 	{
-		str = malloc(_strlen(atp->str) + 1);
-		if (!str)
+		ptr = malloc(_strlen(atp->ptr) + 1);
+		if (!ptr)
 		{
-			for (j = 0; j < i; j++)
-				free(strs[j]);
-			free(strs);
+			for (j = 0; j < k; j++)
+				free(atp[j]);
+			free(atp);
 			return (NULL);
 		}
 
-		str = _strcpy(str, atp->str);
-		strs[i] = str;
+		ptr = _strcpy(ptr, atp->ptr);
+		atp[k] = ptr;
 	}
-	strs[i] = NULL;
-	return (strs);
+	atp[k] = NULL;
+	return (atp);
 }
 
 
